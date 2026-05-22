@@ -23,4 +23,4 @@ Cada arquivo desta pasta corresponde a uma etapa do desenvolvimento e contém:
 
 ## Relatório final de aprendizado
 
-📘 [relatorio-aprendizado.md](./relatorio-aprendizado.md)
+📘 [relatorio-aprendizado.md](./09-relatorio-aprendizado.md)
