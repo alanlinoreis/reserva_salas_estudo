@@ -17,6 +17,8 @@ Cada arquivo desta pasta corresponde a uma etapa do desenvolvimento e contém:
 3. [[03 - Dados mockados iniciais](./03-mocks.md)]
 4. [[04 - Repositorio de dados](./04-repositorio.md)]
 5. [[05 - Tela de listagem](./05-tela-listagem.md)]
+6. [[06 - Formulario de cadastro e edição de reservas](./06-formulario.md)]
+
 
 
 

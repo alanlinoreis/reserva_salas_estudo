@@ -4,6 +4,7 @@ import '../components/reserva_card.dart';
 import '../models/reserva.dart';
 import '../repositories/reserva_repository.dart';
 import '../utils/periodo.dart';
+import 'formulario_reserva_page.dart';
 
 /// Tela inicial da aplicação.
 ///
@@ -41,12 +42,51 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
     );
   }
 
-  void _abrirFormulario({Reserva? reservaParaEditar}) {
-    // Será implementado no Passo 6. Por enquanto só avisa.
+  Future<void> _abrirFormulario({Reserva? reservaParaEditar}) async {
+    final resultado = await Navigator.push<Map<String, dynamic>>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => FormularioReservaPage(
+          reservaParaEditar: reservaParaEditar,
+        ),
+      ),
+    );
+
+    if (resultado == null || !mounted) return;
+
+    final ehEdicao = reservaParaEditar != null;
+
+    setState(() {
+      if (ehEdicao) {
+        final atualizada = reservaParaEditar.copyWith(
+          nomeEstudante: resultado['nomeEstudante'] as String,
+          sala: resultado['sala'] as String,
+          quantidadeParticipantes:
+              resultado['quantidadeParticipantes'] as int,
+          periodo: resultado['periodo'] as Periodo,
+          precisaMultimidia: resultado['precisaMultimidia'] as bool,
+        );
+        _repository.atualizar(atualizada);
+      } else {
+        _repository.adicionar(
+          nomeEstudante: resultado['nomeEstudante'] as String,
+          sala: resultado['sala'] as String,
+          quantidadeParticipantes:
+              resultado['quantidadeParticipantes'] as int,
+          periodo: resultado['periodo'] as Periodo,
+          precisaMultimidia: resultado['precisaMultimidia'] as bool,
+        );
+      }
+    });
+
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Formulário será implementado no próximo passo.'),
-        duration: Duration(seconds: 2),
+      SnackBar(
+        content: Text(
+          ehEdicao
+              ? 'Reserva atualizada com sucesso.'
+              : 'Reserva cadastrada com sucesso.',
+        ),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
