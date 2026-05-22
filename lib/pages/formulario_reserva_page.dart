@@ -86,11 +86,9 @@ class _FormularioReservaPageState extends State<FormularioReservaPage> {
   // ───── Submissão ─────
 
   void _salvar() {
-    // Dispara os validators de todos os campos
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    // Validação extra do dropdown (o Form não cobre o initialValue null)
     if (_periodoSelecionado == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Selecione um período.')),
@@ -98,7 +96,6 @@ class _FormularioReservaPageState extends State<FormularioReservaPage> {
       return;
     }
 
-    // Monta o resultado e devolve para a tela anterior.
     final resultado = {
       'nomeEstudante': _nomeController.text.trim(),
       'sala': _salaController.text.trim(),
@@ -119,94 +116,99 @@ class _FormularioReservaPageState extends State<FormularioReservaPage> {
         title: Text(_ehEdicao ? 'Editar reserva' : 'Nova reserva'),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Nome do estudante
-                TextFormField(
-                  controller: _nomeController,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
-                    labelText: 'Nome do estudante',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (v) => _validarObrigatorio(v, 'Nome'),
-                ),
-                const SizedBox(height: 12),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Nome do estudante
+                    TextFormField(
+                      controller: _nomeController,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        labelText: 'Nome do estudante',
+                      ),
+                      validator: (v) => _validarObrigatorio(v, 'Nome'),
+                    ),
+                    const SizedBox(height: 12),
 
-                // Sala
-                TextFormField(
-                  controller: _salaController,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
-                    labelText: 'Sala',
-                    hintText: 'Ex: Sala 101',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (v) => _validarObrigatorio(v, 'Sala'),
-                ),
-                const SizedBox(height: 12),
+                    // Sala
+                    TextFormField(
+                      controller: _salaController,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        labelText: 'Sala',
+                        hintText: 'Ex: Sala 101',
+                      ),
+                      validator: (v) => _validarObrigatorio(v, 'Sala'),
+                    ),
+                    const SizedBox(height: 12),
 
-                // Quantidade de participantes (numérico)
-                TextFormField(
-                  controller: _quantidadeController,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration(
-                    labelText: 'Quantidade de participantes',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: _validarQuantidade,
-                ),
-                const SizedBox(height: 12),
+                    // Quantidade de participantes (numérico)
+                    TextFormField(
+                      controller: _quantidadeController,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      decoration: const InputDecoration(
+                        labelText: 'Quantidade de participantes',
+                      ),
+                      validator: _validarQuantidade,
+                    ),
+                    const SizedBox(height: 12),
 
-                // Período (Dropdown)
-                DropdownButtonFormField<Periodo>(
-                  initialValue: _periodoSelecionado,
-                  decoration: const InputDecoration(
-                    labelText: 'Período',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: Periodo.values
-                      .map(
-                        (p) => DropdownMenuItem<Periodo>(
-                          value: p,
-                          child: Text(p.label),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (valor) =>
-                      setState(() => _periodoSelecionado = valor),
-                  validator: (v) =>
-                      v == null ? 'Selecione um período.' : null,
-                ),
-                const SizedBox(height: 12),
+                    // Período (Dropdown)
+                    DropdownButtonFormField<Periodo>(
+                      initialValue: _periodoSelecionado,
+                      isExpanded: true,
+                      borderRadius: BorderRadius.circular(10),
+                      decoration: const InputDecoration(
+                        labelText: 'Período',
+                      ),
+                      items: Periodo.values
+                          .map(
+                            (p) => DropdownMenuItem<Periodo>(
+                              value: p,
+                              child: Text(p.label),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (valor) =>
+                          setState(() => _periodoSelecionado = valor),
+                      validator: (v) =>
+                          v == null ? 'Selecione um período.' : null,
+                    ),
+                    const SizedBox(height: 12),
 
-                // Multimídia (Switch)
-                SwitchListTile(
-                  title: const Text('Necessita equipamento multimídia'),
-                  subtitle: const Text(
-                    'Projetor, TV ou outros recursos audiovisuais',
-                  ),
-                  value: _precisaMultimidia,
-                  onChanged: (valor) =>
-                      setState(() => _precisaMultimidia = valor),
-                  contentPadding: EdgeInsets.zero,
-                ),
+                    // Multimídia (Switch)
+                    SwitchListTile(
+                      title: const Text('Necessita equipamento multimídia'),
+                      subtitle: const Text(
+                        'Projetor, TV ou outros recursos audiovisuais',
+                      ),
+                      value: _precisaMultimidia,
+                      onChanged: (valor) =>
+                          setState(() => _precisaMultimidia = valor),
+                      contentPadding: EdgeInsets.zero,
+                    ),
 
-                const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                // Botão de salvar
-                FilledButton.icon(
-                  onPressed: _salvar,
-                  icon: const Icon(Icons.save),
-                  label: Text(_ehEdicao ? 'Salvar alterações' : 'Cadastrar'),
+                    // Botão de salvar
+                    FilledButton.icon(
+                      onPressed: _salvar,
+                      icon: const Icon(Icons.save),
+                      label: Text(
+                        _ehEdicao ? 'Salvar alterações' : 'Cadastrar',
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

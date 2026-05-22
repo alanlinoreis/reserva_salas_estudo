@@ -138,16 +138,12 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
         children: [
           // ───── Campo de busca ─────
           Padding(
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 10),
             child: TextField(
               controller: _buscaController,
               decoration: InputDecoration(
                 hintText: 'Buscar por estudante ou sala...',
                 prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                isDense: true,
                 suffixIcon: _textoBusca.isEmpty
                     ? null
                     : IconButton(
@@ -171,10 +167,10 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
                 Expanded(
                   child: DropdownButtonFormField<Periodo?>(
                     initialValue: _filtroPeriodo,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(10),
                     decoration: const InputDecoration(
                       labelText: 'Período',
-                      isDense: true,
-                      border: OutlineInputBorder(),
                     ),
                     items: [
                       const DropdownMenuItem<Periodo?>(
@@ -188,8 +184,7 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
                         ),
                       ),
                     ],
-                    onChanged: (valor) =>
-                        setState(() => _filtroPeriodo = valor),
+                    onChanged: (valor) => setState(() => _filtroPeriodo = valor),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -197,10 +192,10 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
                 Expanded(
                   child: DropdownButtonFormField<bool?>(
                     initialValue: _filtroMultimidia,
+                    isExpanded: true,
+                    borderRadius: BorderRadius.circular(10),
                     decoration: const InputDecoration(
                       labelText: 'Multimídia',
-                      isDense: true,
-                      border: OutlineInputBorder(),
                     ),
                     items: const [
                       DropdownMenuItem<bool?>(
@@ -216,8 +211,7 @@ class _ListaReservasPageState extends State<ListaReservasPage> {
                         child: Text('Sem'),
                       ),
                     ],
-                    onChanged: (valor) =>
-                        setState(() => _filtroMultimidia = valor),
+                    onChanged: (valor) => setState(() => _filtroMultimidia = valor),
                   ),
                 ),
               ],

@@ -12,17 +12,14 @@ Cada arquivo desta pasta corresponde a uma etapa do desenvolvimento e contém:
 
 ## Índice
 
-1. [01 - Setup inicial e estrutura de pastas](./01-setup-inicial.md)
+1. [[01 - Setup inicial e estrutura de pastas](./01-setup-inicial.md)]
 2. [[02 - Modelagem das classes de período e reserva do sistema](./02-modelo-reserva.md)]
 3. [[03 - Dados mockados iniciais](./03-mocks.md)]
 4. [[04 - Repositorio de dados](./04-repositorio.md)]
 5. [[05 - Tela de listagem](./05-tela-listagem.md)]
 6. [[06 - Formulario de cadastro e edição de reservas](./06-formulario.md)]
-
-
-
-
-> Os demais arquivos serão adicionados conforme o projeto avança.
+7. [[07 - Refinamento visual e correções de UI](./07-refinamento-visual.md)]
+8. [[08 - Criação do README.md](./08-readme.md)]
 
 ## Relatório final de aprendizado
 
