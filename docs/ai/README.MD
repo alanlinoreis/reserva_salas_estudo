@@ -14,6 +14,7 @@ Cada arquivo desta pasta corresponde a uma etapa do desenvolvimento e contém:
 
 1. [01 - Setup inicial e estrutura de pastas](./01-setup-inicial.md)
 2. [[02 - Modelagem das classes de período e reserva do sistema](./02-modelo-reserva.md)]
+3. [[03 - Dados mockados iniciais](./03-mocks.md)]
 
 > Os demais arquivos serão adicionados conforme o projeto avança.
 
