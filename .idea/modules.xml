@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/reserva_salas_estudo.iml" filepath="$PROJECT_DIR$/reserva_salas_estudo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/reserva_salas_estudo_android.iml" filepath="$PROJECT_DIR$/android/reserva_salas_estudo_android.iml" />
+    </modules>
+  </component>
+</project>
